@@ -1,25 +1,38 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
     const { store, actions } = useContext(Context);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("")
+    const navigate=useNavigate()
+    
+    const handleClick = async (e) => {
+        e.preventDefault()
+        console.log(email,password)
+    }
+
     return (
-        <div className="text-center mt-5">
-            <h1>Hello Rigo!!</h1>
-            <p>
-                <img src={rigoImageUrl} />
-            </p>
-            <div className="alert alert-info">
-                {store.message || "Loading message from the backend (make sure your python backend is running)..."}
-            </div>
-            <p>
-                This boilerplate comes with lots of documentation:{" "}
-                <a href="https://start.4geeksacademy.com/starters/react-flask">
-                    Read documentation
-                </a>
-            </p>
+        <div className="container"> {/* Cambiado class a className */}
+            <h1>Register page</h1>
+            <form>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                </div>
+                
+                
+                <button type="button" class="btn btn-primary" onClick={(e) => handleClick(e)}>Submit</button>
+
+            </form>
         </div>
     );
 };

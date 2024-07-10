@@ -20,8 +20,17 @@ CORS(api)
 def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    if email != "test" or password != "test":
+
+    user=User.query.filter_by(email=email).first()
+    if user is None: 
+        return jsonify({"msg": "Bad username or password"}), 401
+    
+    if email != user.email or password != user.password:
         return jsonify({"msg": "Bad username or password"}), 401
 
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token)
+    response_body={
+        "access_token":access_token,
+        "user":user.serialize()
+    }
+    return jsonify(response_body),200
