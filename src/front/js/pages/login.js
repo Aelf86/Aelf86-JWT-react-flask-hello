@@ -7,6 +7,7 @@ export const Login = () => {
     const { store, actions } = useContext(Context);
     const { email, setEmail} = useState("");
     const { password, setPassword} = useState("")
+    const token = sessionStorage.getItem("token");
 
     const handleClick = () => {
         const opts = {
@@ -22,7 +23,10 @@ export const Login = () => {
                 if(resp.status === 200) return resp.json();
                 else alert("There has been a mistake");
             })
-            .then()
+            .then(data => {
+                console.log("this came from the backend", data)
+                sessionStorage.setItem("token,data.access_token")
+            })
             .catch(error =>{
                 console.error("There was an error", error);
             })
@@ -30,6 +34,8 @@ export const Login = () => {
 
     return (
         <div className="form-box"> {/* Cambiado class a className */}
+        <h1>Login page</h1>
+        {token && token!="" & token != undefined  ? ( "You were logged in with this token" + token ): } 
             <form className="form"> {/* Cambiado class a className */}
                 <span className="title">Sign up</span> {/* Cambiado class a className */}
                 <span className="subtitle">Create a free account with your email.</span> {/* Cambiado class a className */}
