@@ -9,6 +9,7 @@ from flask_cors import CORS
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
+import json
 
 api = Blueprint('api', __name__)
 
@@ -34,3 +35,22 @@ def create_token():
         "user":user.serialize()
     }
     return jsonify(response_body),200
+
+@api.route("/register", methods=["POST"])
+def create_register():
+    body=json.loads(request.data)
+
+    user=User.query.filter_by(email=body["email"]).first()
+    if user is None: 
+        new_user=User(
+            email=body["email"],
+            password=body["password"],
+            name=body["name"],
+            lastname=body["lastname"],
+            is_active=True
+        )
+        db.session.add(new_user)
+        db.session.commit()
+        return jsonify({"msg":"usuario_creado"}), 200
+    
+    return jsonify({"msg": "User already exists"}), 404

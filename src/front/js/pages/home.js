@@ -8,28 +8,61 @@ export const Home = () => {
     const { store, actions } = useContext(Context);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
-    const navigate=useNavigate()
-    
+    const [name, setName] = useState("")
+    const [lastname, setLastname] = useState("")
+    const navigate = useNavigate()
+
     const handleClick = async (e) => {
         e.preventDefault()
-        console.log(email,password)
+       let resp=await actions.register(email, password,name,lastname)
+       if (resp){
+        navigate("/login")
+       }else{
+        alert("Registered user")
+       }
     }
+
 
     return (
         <div className="container"> {/* Cambiado class a className */}
             <h1>Register page</h1>
             <form>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <div className="row">
+                    <div className="col">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={name} onChange={(e) => setName(e.target.value)} />
+
+                        </div>
+                    </div>
+                    <div className="col">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={lastname} onChange={(e) => setLastname(e.target.value)} />
+
+                        </div>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                <div className="row">
+                    <div className="col">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                    </div>
+                    <div className="col">
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" value={password} onChange={(e) => setPassword(e.target.value)} />
+                        </div>
+
+                    </div>
+
                 </div>
-                
-                
+
+
+
                 <button type="button" class="btn btn-primary" onClick={(e) => handleClick(e)}>Submit</button>
 
             </form>
