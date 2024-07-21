@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 
 export const Home = () => {
@@ -15,26 +16,25 @@ export const Home = () => {
 
     const handleClick = async (e) => {
         e.preventDefault()
-       let resp=await actions.register(email, password,name,lastname)
-       if (resp){
-        navigate("/login")
-       }else{
-        alert("Registered user")
-        
-       }
+        let resp = await actions.register(email, password, name, lastname)
+        if (resp) {
+            navigate("/login")
+        } else {
+            Swal.fire("Registered user");
+        }
     };
 
     const handleChangeLogin = (e) => {
-        
-       let resp= actions.register(email, password,name,lastname)
-       if (resp){
-        navigate("/login")
-       }else{
-        alert("Registered user")
-        
-       }
+
+        let resp = actions.register(email, password, name, lastname)
+        if (resp) {
+            navigate("/login")
+        } else {
+            alert("Registered user")
+
+        }
     };
-    
+
 
     return (
         <div className="container"> {/* Cambiado class a className */}
@@ -77,7 +77,10 @@ export const Home = () => {
 
 
                 <button type="button" class="btn btn-primary" onClick={(e) => handleClick(e)}>Submit</button>
-                <button type="button" class="btn btn-primary" onClick={(e) => handleChangeLogin(e)}>To login</button>
+                <div>
+                    <h1>Already Registered?</h1>
+                    <button type="button" class="btn btn-primary" onClick={(e) => handleChangeLogin(e)}>To login</button>
+                </div>
             </form>
         </div>
     );
