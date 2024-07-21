@@ -4,6 +4,7 @@ import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
 
+
 export const Home = () => {
     const { store, actions } = useContext(Context);
     const [email, setEmail] = useState("");
@@ -19,9 +20,21 @@ export const Home = () => {
         navigate("/login")
        }else{
         alert("Registered user")
+        
        }
-    }
+    };
 
+    const handleChangeLogin = (e) => {
+        
+       let resp= actions.register(email, password,name,lastname)
+       if (resp){
+        navigate("/login")
+       }else{
+        alert("Registered user")
+        
+       }
+    };
+    
 
     return (
         <div className="container"> {/* Cambiado class a className */}
@@ -64,7 +77,7 @@ export const Home = () => {
 
 
                 <button type="button" class="btn btn-primary" onClick={(e) => handleClick(e)}>Submit</button>
-
+                <button type="button" class="btn btn-primary" onClick={(e) => handleChangeLogin(e)}>To login</button>
             </form>
         </div>
     );
