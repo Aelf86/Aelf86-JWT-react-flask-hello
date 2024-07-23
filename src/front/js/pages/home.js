@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Swal from 'sweetalert2';
 
 
@@ -38,6 +38,7 @@ export const Home = () => {
 
     return (
         <div className="container"> {/* Cambiado class a className */}
+           
             <h1>Register page</h1>
             <form>
                 <div className="row">
@@ -79,7 +80,7 @@ export const Home = () => {
                 <button type="button" class="btn btn-primary" onClick={(e) => handleClick(e)}>Submit</button>
                 <div>
                     <h1>Already Registered?</h1>
-                    <button type="button" class="btn btn-primary" onClick={(e) => handleChangeLogin(e)}>To login</button>
+                    <button type="button" class="btn btn-primary" onClick={(e) => handleChangeLogin(e)}>Go to login</button>
                 </div>
             </form>
         </div>
