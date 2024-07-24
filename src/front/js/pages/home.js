@@ -75,11 +75,9 @@ export const Home = () => {
 
                 </div>
 
-
-
                 <button type="button" class="btn btn-primary" onClick={(e) => handleClick(e)}>Submit</button>
                 <div>
-                    <h1>Already Registered?</h1>
+                    <h1>Already signed up?</h1>
                     <button type="button" class="btn btn-primary" onClick={(e) => handleChangeLogin(e)}>Go to login</button>
                 </div>
             </form>

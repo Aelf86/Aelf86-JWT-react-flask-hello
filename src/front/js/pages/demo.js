@@ -7,9 +7,6 @@ export const Demo = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="container">
-			<h1>Bienvenido a tu perfil {store.user.email}</h1>
-
-		</div>
+		<div></div>
 	);
 };

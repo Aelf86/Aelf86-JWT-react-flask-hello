@@ -17,7 +17,7 @@ export const Login = () => {
         console.log(email, password)
         let resp = await actions.login(email, password)
         if (resp) {
-            navigate("/demo")
+            navigate("/user")
         } else {
             Swal.fire({
                 icon: "error",
